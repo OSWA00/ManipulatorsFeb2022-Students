@@ -63,30 +63,12 @@
 		<child link="chassis" />
 	</joint>
 
+
 	<!-- TASK 1a - create the shape needed for the wheel specified in  -->
 	<!--RIGHT WHEEL  -->
-	<link name="right_wheel">
-		<visual>
-			<origin xyz="0 0 0" rpy="-${PI/2} 0 0" />
-			<geometry>
-				<!-- with mesh-->
-				<mesh filename="file://${mesh_wheel}" />
-			</geometry>
-		</visual>
 
-		<collision>
-			<origin xyz="0 0 0 " rpy="-${PI/2} 0 0" />
-			<geometry>
-				<cylinder length="${wheelHeight}" radius="${wheelRadius}" />
-			</geometry>
-		</collision>
-
-		<inertial>
-			<mass value="${wheelMass}" />
-			<origin xyz="0 0 0" rpy="${PI/2} 0 0" />
-			<xacro:wheel_inertia r="${wheelRadius}" l="${wheelHeight}" m="${wheelMass}" />
-		</inertial>
-	</link>
+	<xacro:wheel name="right"  reflect="-1"/>
+	<xacro:wheel name="left" reflect="1"/>
 
 	<!-- TASK 1b -remember using Macros-->
 	<!-- LEFT WHEEL 
@@ -104,7 +86,6 @@
 		<origin xyz="0.05 -0.09 0.0" />
 		<axis xyz="0 1 0" rpy="0 0 0" />
 	</joint>
-	<!--
 
 	<joint name="base_to_left_w" type="continuous">
 	  <parent link="chassis" />
@@ -112,8 +93,6 @@
 	  <origin xyz="0.05 0.09 0" />
 	  <axis xyz="0 1 0" rpy="0 0 0" />
 	</joint>
--->
-
 
 	<!-- TRANSMISSIONS (For a more complex model and it represents actuator attributes) -->
 
