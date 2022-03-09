@@ -67,8 +67,8 @@
 	<!-- TASK 1a - create the shape needed for the wheel specified in  -->
 	<!--RIGHT WHEEL  -->
 
-	<xacro:wheel name="right"  reflect="-1"/>
-	<xacro:wheel name="left" reflect="1"/>
+	<xacro:wheel name="right" reflect="-1" />
+	<xacro:wheel name="left" reflect="1" />
 
 	<!-- TASK 1b -remember using Macros-->
 	<!-- LEFT WHEEL 
@@ -88,12 +88,32 @@
 	</joint>
 
 	<joint name="base_to_left_w" type="continuous">
-	  <parent link="chassis" />
-	  <child link="left_wheel" />
-	  <origin xyz="0.05 0.09 0" />
-	  <axis xyz="0 1 0" rpy="0 0 0" />
+		<parent link="chassis" />
+		<child link="left_wheel" />
+		<origin xyz="0.05 0.09 0" />
+		<axis xyz="0 1 0" rpy="0 0 0" />
 	</joint>
 
 	<!-- TRANSMISSIONS (For a more complex model and it represents actuator attributes) -->
+	<transmission name="right_wheel_trans">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="base_to_right_w">
+			<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="right_wheel_motor">
+			<mechanicalReduction>34</mechanicalReduction>
+			<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+		</actuator>
+	</transmission>
 
+	<transmission name="left_wheel_trans">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="base_to_left_w">
+			<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="left_wheel_motor">
+			<mechanicalReduction>34</mechanicalReduction>
+			<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+		</actuator>
+	</transmission>
 </robot>
